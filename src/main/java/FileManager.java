@@ -47,6 +47,26 @@ public class FileManager {
         }
         file.delete();
     }
+    public void writeString(String str){
+        writeString(str, false);
+    }
+    public void writeString(String str, boolean isAppend){
+        try(FileWriter fileWriter = new FileWriter(path, isAppend)){
+            fileWriter.append(str);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public int readInt() throws IOException{
+        int result = 0;
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(path))){
+            result = Integer.parseInt(bufferedReader.readLine());
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }
 
 }
